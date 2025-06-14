@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Logs
+*.log
+
+# Coverage / testing
+.coverage
+.cache
+.pytest_cache/
+htmlcov/
+
+# Alembic
+alembic/versions/__pycache__/
+alembic/versions/*.pyc
+
+# Environment variables
+.env
+
+# VSCode / IDEs
+.vscode/
+.idea/
+
+# Docker
+*.pid
+
+# Ignore system files
+.DS_Store
+Thumbs.db
