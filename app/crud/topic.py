@@ -3,9 +3,9 @@ from sqlalchemy import update, delete
 from app.models.topic import Topic
 from app.database import SessionLocal
 
-async def get_topics():
+async def get_topics(skip: int = 0, limit: int = 10):
     async with SessionLocal() as session:
-        result = await session.execute(select(Topic))
+        result = await session.execute(select(Topic).offset(skip).limit(limit))
         return result.scalars().all()
 
 async def get_topic(topic_id: int):

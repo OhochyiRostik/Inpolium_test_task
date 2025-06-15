@@ -90,6 +90,21 @@ docker-compose up --build
 | PUT    | `/comments/{id}`   | Update a comment         |
 | DELETE | `/comments/{id}`   | Delete a comment         |
 
+### Pagination: limit and skip
+
+Many list endpoints support pagination using query parameters:
+
+| Parameter | Type    | Description                         |
+|-----------|---------|-------------------------------------|
+| `limit`   | Integer | Number of items to return           |
+| `skip`    | Integer | Number of items to skip (offset)    |
+
+Example:
+
+GET /posts/?skip=10&limit=5
+
+Returns posts 11 to 15.
+
 ## Example Requests
 
 ### Create a topic

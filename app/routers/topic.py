@@ -5,8 +5,8 @@ from app.crud import topic as topic_crud
 router = APIRouter(prefix="/topics", tags=["Topics"])
 
 @router.get("/", response_model=list[TopicOut])
-async def list_topics():
-    return await topic_crud.get_topics()
+async def list_topics(skip: int = 0, limit: int = 10):
+    return await topic_crud.get_topics(skip, limit)
 
 @router.get("/{topic_id}", response_model=TopicOut)
 async def read_topic(topic_id: int):
