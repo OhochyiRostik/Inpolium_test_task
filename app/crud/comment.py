@@ -1,11 +1,16 @@
 from sqlalchemy.future import select
-from sqlalchemy import update, delete
+from sqlalchemy import update, delete, desc, asc
 from app.models.comment import Comment
 from app.database import SessionLocal
 
-async def get_comments(skip: int = 0, limit: int = 10):
+async def get_comments(skip: int = 0, limit: int = 10, sort_by: str = "id", order: str = "asc"):
     async with SessionLocal() as session:
-        result = await session.execute(select(Comment).offset(skip).limit(limit))
+        stmt = select(Comment)
+        if hasattr(Comment, sort_by):
+            column_attr = getattr(Comment, sort_by)
+            stmt = stmt.order_by(desc(column_attr) if order == "desc" else asc(column_attr))
+        stmt = stmt.offset(skip).limit(limit)
+        result = await session.execute(stmt)
         return result.scalars().all()
 
 async def get_comment(comment_id: int):

@@ -90,20 +90,28 @@ docker-compose up --build
 | PUT    | `/comments/{id}`   | Update a comment         |
 | DELETE | `/comments/{id}`   | Delete a comment         |
 
-### Pagination: limit and skip
+### Pagination and Sorting: limit, skip, sort_by, and order
 
-Many list endpoints support pagination using query parameters:
+Many list endpoints support pagination and sorting using query parameters:
 
-| Parameter | Type    | Description                         |
-|-----------|---------|-------------------------------------|
-| `limit`   | Integer | Number of items to return           |
-| `skip`    | Integer | Number of items to skip (offset)    |
+| Parameter | Type                   | Description                         |
+|-----------|------------------------|-------------------------------------|
+| `limit`   | Integer                | Number of items to return           |
+| `skip`    | Integer                | Number of items to skip (offset)    |
+| `sort_by` | String (field name)    | Field by which to sort the results  |
+| `order`   | "asc" or "desc"        | Sort order: ascending or descending |
 
-Example:
+Example 1:
 
 GET /posts/?skip=10&limit=5
 
 Returns posts 11 to 15.
+
+Example 2: Pagination with Sorting
+
+GET /posts/?sort_by=created_at&order=desc&limit=5
+
+Returns the latest 5 posts sorted by creation time in descending order.
 
 ## Example Requests
 

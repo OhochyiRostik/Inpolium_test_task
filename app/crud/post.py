@@ -1,11 +1,16 @@
 from sqlalchemy.future import select
-from sqlalchemy import update, delete
+from sqlalchemy import update, delete, desc, asc
 from app.models.post import Post
 from app.database import SessionLocal
 
-async def get_posts(skip: int = 0, limit: int = 10):
+async def get_posts(skip: int = 0, limit: int = 10, sort_by: str = "id", order: str = "asc"):
     async with SessionLocal() as session:
-        result = await session.execute(select(Post).offset(skip).limit(limit))
+        stmt = select(Post)
+        if hasattr(Post, sort_by):
+            column_attr = getattr(Post, sort_by)
+            stmt = stmt.order_by(desc(column_attr) if order == "desc" else asc(column_attr))
+        stmt = stmt.offset(skip).limit(limit)
+        result = await session.execute(stmt)
         return result.scalars().all()
 
 async def get_post(post_id: int):
