@@ -94,8 +94,8 @@ docker-compose up --build
 
 ### Create a topic
 
-```json
 POST /topics
+```json
 {
   "name": "Topic 1"
 }
@@ -103,8 +103,8 @@ POST /topics
 
 ### Create a post
 
-```json
 POST /posts
+```json
 {
   "title": "My first post",
   "content": "Hello",
@@ -114,8 +114,8 @@ POST /posts
 
 ### Create a comment
 
-```json
 POST /comments
+```json
 {
   "content": "Very good",
   "post_id": 1
